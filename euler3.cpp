@@ -1,22 +1,30 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
 const unsigned long long TARGET = 600851475143;
-
-int main () {
-    long fac = 0;
-    
-    for (int i = 1; i < TARGET; i++) {
-        if (isPrime(i)) fac = i;
-    }
-}
+const unsigned long long TARGET2 = 13195;
+vector<long> primes;
 
 bool isPrime (long num) {
-    for (int i = 2; i < num/2; i++) {
-        if (num%i == 0) return false
+    for (auto prime : primes) {
+        if (num%prime == 0) return false;
     }
-            
+    
+    cout << "adding: " << num << endl;
     return true;
+}
+
+int main () {
+    primes.push_back(2);
+    
+    for (int i = 3; i <= sqrt(TARGET); i++) {
+        if (TARGET%i == 0 && isPrime(i)) primes.push_back(i);
+    }
+    
+    cout << "Largest factor is: " << primes.back() << endl;
+    
+    return 0;
 }
